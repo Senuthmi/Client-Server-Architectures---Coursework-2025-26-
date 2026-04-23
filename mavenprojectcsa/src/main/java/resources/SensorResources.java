@@ -40,7 +40,7 @@ public class SensorResources {
     private static Map<String, Sensors> sensors = new HashMap<>();
     private static Map<String, Room> rooms = RoomResources.getRooms();
 
-    // GET all sensors (with optional filtering)
+    // GET all sensors 
     @GET
     public Response getAllSensors(@QueryParam("type") String type) {
 
