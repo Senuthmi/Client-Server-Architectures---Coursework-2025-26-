@@ -53,7 +53,7 @@ public class RoomResources {
         return Response.ok(room).build();
     }
 
-    // CREATE room (IMPORTANT FIX)
+    // CREATE room
     @POST
     public Response createRoom(Room room) {
         if (room == null || room.getId() == null || room.getId().isBlank()) {
@@ -89,7 +89,7 @@ public class RoomResources {
         return Response.ok(updatedRoom).build();
     }
 
-    // DELETE room (with business rule)
+    // DELETE room 
     @DELETE
     @Path("/{id}")
     public Response deleteRoom(@PathParam("id") String id) {
