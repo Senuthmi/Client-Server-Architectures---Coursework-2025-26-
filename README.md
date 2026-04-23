@@ -68,9 +68,9 @@ Using @QueryParam for filtering is more appropriate. For example /sensors?type=C
 In contrast, using a path like /sensors/type/CO2 suggests a resource structure. This is less flexible. Query parameters allow multiple filters to be combined easily. They are better suited for search and filtering operations.
 Advantages of query parameters include:
 
--Support for multiple filtering criteria
--Improved readability and flexibility
--Alignment with standard REST conventions
+- Support for multiple filtering criteria
+- Improved readability and flexibility
+- Alignment with standard REST conventions
 
 Therefore, query parameters provide a more scalable and semantically accurate approach for filtering and searching operations.
 
@@ -86,10 +86,10 @@ For example, instead of handling /sensors/{id}/readings/{rid} in one large class
 
 This approach offers several benefits:
 
--Separation of concerns: Each class is responsible for a specific part of the API
--Improved readability: Smaller, focused classes are easier to understand
--Maintainability: Changes to one part of the API do not affect unrelated components
--Scalability: The API structure can grow without becoming overly complex
+- Separation of concerns: Each class is responsible for a specific part of the API
+- Improved readability: Smaller, focused classes are easier to understand
+- Maintainability: Changes to one part of the API do not affect unrelated components
+- Scalability: The API structure can grow without becoming overly complex
 
 In contrast, a monolithic controller handling all routes can become difficult to manage, debug, and extend, especially as the application grows.
 
