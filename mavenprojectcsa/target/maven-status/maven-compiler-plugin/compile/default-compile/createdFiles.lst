@@ -1,0 +1,16 @@
+com\mycompany\mavenproject2\ApplicationConfig.class
+exception\RoomNotEmptyException.class
+exceptionmappers\SensorUnavailableExceptionMapper.class
+resources\SensorResources.class
+resources\testResource.class
+models\SensorReading.class
+exceptionmappers\GlobalExceptionMapper.class
+resources\SensorReadingResource.class
+exceptionmappers\RoomNotEmptyExceptionMapper.class
+resources\DiscoveryResource.class
+models\Room.class
+resources\RoomResources.class
+exception\SensorUnavailableException.class
+exceptionmappers\LinkedResourceNotFoundExceptionMapper.class
+models\Sensors.class
+exception\LinkedResourceNotFoundException.class
