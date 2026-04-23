@@ -48,9 +48,17 @@ Even though the response may differ, the final state of the Room Management syst
 
 ### 1. We explicitly use the @Consumes (MediaType.APPLICATION_JSON) annotation on the POST method. Explain the technical consequences if a client attempts to send data in a different format, such as text/plain or application/xml. How does JAX-RS handle this mismatch?
 
-The @Consumes(MediaType.APPLICATION_JSON) annotation is important. It specifies that the API only accepts JSON input.
-If a client sends data in another format, JAX-RS will reject the request. It will return an HTTP 415 Media Type error.
-This ensures that the server only processes data in the expected format. The Sensor Operations system should be designed with this in mind.
+The @Consumes(MediaType.APPLICATION_JSON) annotation specifies that the API endpoint only accepts requests with a Content-Type of application/json.
+
+If a client sends data in an unsupported format such as text/plain or application/xml, the JAX-RS runtime will not attempt to process the request. Instead, it will automatically return an HTTP 415 (Unsupported Media Type) response.
+
+This behavior ensures:
+
+**Data consistency**, as the server processes only expected formats
+**Input validation**, preventing malformed or incompatible data
+**Clear communication** to clients about acceptable request formats
+
+Additionally, JAX-RS uses message body readers to convert incoming JSON into Java objects. If the format does not match, deserialization cannot occur, reinforcing the importance of specifying the correct media type.
 
 ---
 
@@ -58,6 +66,13 @@ This ensures that the server only processes data in the expected format. The Sen
 
 Using @QueryParam for filtering is more appropriate. For example /sensors?type=CO2 is a way to filter sensors.  This is because filtering does not represent a distinct resource, but rather a subset of a collection.
 In contrast, using a path like /sensors/type/CO2 suggests a resource structure. This is less flexible. Query parameters allow multiple filters to be combined easily. They are better suited for search and filtering operations.
+Advantages of query parameters include:
+
+-Support for multiple filtering criteria
+-Improved readability and flexibility
+-Alignment with standard REST conventions
+
+Therefore, query parameters provide a more scalable and semantically accurate approach for filtering and searching operations.
 
 ---
 
@@ -65,9 +80,18 @@ In contrast, using a path like /sensors/type/CO2 suggests a resource structure. 
 
 ### 1. Discuss the architectural benefits of the Sub-Resource Locator pattern. How does delegating logic to separate classes help manage complexity in large APIs compared to defining every nested path (e.g., sensors/{id}/readings/{rid}) in one massive con-troller class?
 
-The Sub-Resource Locator pattern is beneficial. It improves code organization by separating logic into focused classes.,
-Instead of handling all nested routes in one large class, each resource manages its own functionality.
-This enhances readability, maintainability and scalability. It is especially useful in APIs with complex relationships.
+The Sub-Resource Locator pattern allows a resource class to delegate handling of nested paths to separate classes, rather than managing all endpoints within a single controller.
+
+For example, instead of handling /sensors/{id}/readings/{rid} in one large class, the main resource can delegate /readings to a dedicated sub-resource class.
+
+This approach offers several benefits:
+
+-Separation of concerns: Each class is responsible for a specific part of the API
+-Improved readability: Smaller, focused classes are easier to understand
+-Maintainability: Changes to one part of the API do not affect unrelated components
+-Scalability: The API structure can grow without becoming overly complex
+
+In contrast, a monolithic controller handling all routes can become difficult to manage, debug, and extend, especially as the application grows.
 
 ---
 
