@@ -2,7 +2,7 @@
 
 ## Part 1: Service Architecture & Setup
 
-### 1. In your report, explain the default lifecycle of a JAX-RS Resource class. Is a new instance instantiated for every incoming request, or does the runtime treat it as a singleton?
+### 1. . In your report, explain the default lifecycle of a JAX-RS Resource class. Is a new instance instantiated for every incoming request, or does the runtime treat it as a singleton? Elaborate on how this architectural decision impacts the way you manage andsynchronize your in-memory data structures (maps/lists) to prevent data loss or race conditions
 
 The lifecycle of a JAX-RS resource class is, by default, per-request scoped. This means that a new instance of the resource class is created for every incoming HTTP request. This design ensures thread safety at the object level, since no two requests share the same instance.
 
@@ -12,7 +12,7 @@ To prevent this in production systems, thread-safe alternatives such as `Concurr
 
 ---
 
-### 2. Why is the provision of hypermedia considered a hallmark of advanced RESTful design?
+### 2. Why is the provision of ”Hypermedia” (links and navigation within responses)considered a hallmark of advanced RESTful design (HATEOAS)? How does this approach benefit client developers compared to static documentation?
 
 Hypermedia or HATEOAS means that API responses include links to resources. This allows clients to dynamically navigate the API. This is because it reduces the need for clients to rely on hardcoded URLs or external documentation. Instead, clients can discover actions directly from responses. This approach is good for flexibility, maintainability and scalability. Changes to endpoints can be communicated through links without breaking client applications.
 
@@ -27,7 +27,7 @@ Compared to traditional REST APIs, HATEOAS enables a more self-descriptive and e
 
 ## Part 2: Room Management
 
-### 1. When returning a list of rooms, what are the implications of returning only IDs versus returning full room objects?
+### 1. When returning a list of rooms, what are the implications of returning only IDs versus returning the full room objects? Consider network bandwidth and client side processing
 
 Returning only IDs reduces network bandwidth usage. This is because less data is transmitted over the network. However, it requires the client to make requests to retrieve full details.
 On the other hand, returning full room objects increases payload size. It provides complete information in a single request. This improves efficiency for the client.
