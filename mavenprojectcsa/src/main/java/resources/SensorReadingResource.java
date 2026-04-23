@@ -52,7 +52,6 @@ public class SensorReadingResource {
     @POST
     public Response addReading(SensorReading reading) {
     
-        //  validation (keep simple or convert later if you want)
         if (reading == null) {
             return Response.status(400)
                     .entity("Invalid reading")
@@ -67,14 +66,14 @@ public class SensorReadingResource {
     
         Sensors sensor = sensors.get(sensorId);
     
-        //  404 → should ideally be exception, but allowed here
+        //  404 
         if (sensor == null) {
             return Response.status(404)
                     .entity("Sensor not found")
                     .build();
         }
     
-        //  403 → exception
+        //  403 
         if ("MAINTENANCE".equalsIgnoreCase(sensor.getStatus())
                 || "OFFLINE".equalsIgnoreCase(sensor.getStatus())) {
     
